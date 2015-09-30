@@ -3,7 +3,7 @@ import {
   DESTROY_RESOURCE_SUCCESS,
   PATCH_RESOURCE_SUCCESS,
   FETCH_RESOURCE_SUCCESS,
-  } from '../actions/async-resource';
+  } from '../constants/async-resource';
 
 import { Map } from 'immutable';
 

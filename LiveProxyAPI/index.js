@@ -20,25 +20,25 @@ startServer(store);
 // TEST CALLS
 
 store.dispatch(resourceActions['FETCH_RESOURCE']({def: post}));
-store.dispatch(resourceActions['CREATE_RESOURCE']({
-  def: post,
-  doc: {
-    user_id: 1,
-    title: 'New Post',
-    body: 'Another Post',
-  },
-}));
+// store.dispatch(resourceActions['CREATE_RESOURCE']({
+//   def: post,
+//   doc: {
+//     user_id: 1,
+//     title: 'New Post',
+//     body: 'Another Post',
+//   },
+// }));
 
-setTimeout(() => {
-  store.dispatch(resourceActions['PATCH_RESOURCE']({
-    def: post,
-    doc: {
-      title: 'Modified Post',
-      body: 'Post modified',
-      id: 1,
-    },
-  }));
-}, 2000);
+// setTimeout(() => {
+//   store.dispatch(resourceActions['PATCH_RESOURCE']({
+//     def: post,
+//     doc: {
+//       title: 'Modified Post',
+//       body: 'Post modified',
+//       id: 1,
+//     },
+//   }));
+// }, 2000);
 
 store.dispatch(resourceActions['FETCH_RESOURCE']({def: comment}));
 store.dispatch(resourceActions['FETCH_RESOURCE']({def: user}));

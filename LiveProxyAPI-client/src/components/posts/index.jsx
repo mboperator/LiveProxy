@@ -54,7 +54,7 @@ export class Posts extends React.Component {
             <Post
               onDelete={this._handleDelete}
               comments={comments.filter(comment => {
-                return comment.post_id === obj.id;
+                return comment.post_id == obj.id;
               })}
               data={obj}
             />
@@ -80,7 +80,7 @@ export class Posts extends React.Component {
 function mapStateToProps(state) {
   return {
     posts: state.getIn(['collections', 'posts'], Map()).toJS(),
-    comments: state.getIn(['collections', 'comments'], Map()).toArray().toJS(),
+    comments: state.getIn(['collections', 'comments'], Map()).toList().toJS(),
   };
 }
 

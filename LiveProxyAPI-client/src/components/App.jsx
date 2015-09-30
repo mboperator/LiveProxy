@@ -7,7 +7,7 @@ export default class App extends React.Component {
     return (
       <div>
         <NavBar/>
-        <div style={{margin: '0 auto', width: '960px'}}>
+        <div style={{margin: '0 auto', width: '96vw', maxWidth: '960px'}}>
           <RouteHandler/>
         </div>
       </div>
