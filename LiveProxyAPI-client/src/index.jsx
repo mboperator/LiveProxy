@@ -8,10 +8,11 @@ import io from 'socket.io-client';
 
 import App from './components/App';
 import { StateViewerContainer } from './components/StateViewer';
+import { PostsContainer } from './components/posts';
 
-import reducer from './reducer';
-import { setState } from './action_creators';
-import remoteActionMiddleware from './remote_action_middleware';
+import reducer from './reducers/reducer';
+import { setState } from './actions/action_creators';
+import remoteActionMiddleware from './middleware/remote_action_middleware';
 
 console.log('websock at', `${location.protocol}//${location.hostname}:8090`);
 const socket = io(`${location.protocol}//${location.hostname}:8090`);
@@ -29,6 +30,8 @@ socket.on('state', state => {
 
 const routes = (
   <Route handler={App}>
+    <Route name='stateViewer' path='/viewer' handler={StateViewerContainer}/>
+    <Route name='posts' path='/posts' handler={PostsContainer}/>
     <DefaultRoute handler={StateViewerContainer}/>
   </Route>
 );

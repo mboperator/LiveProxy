@@ -1,4 +1,5 @@
 import Server from 'socket.io';
+import * as resourceActions from './actions/resource';
 
 export default function startServer(store) {
   const io = new Server().attach(8090);
@@ -13,7 +14,7 @@ export default function startServer(store) {
     socket.emit('state', store.getState().toJS());
     socket.on('action', (action) => {
       console.log('received', action);
-      store.dispatch(action);
+      store.dispatch(resourceActions[action]);
     });
   });
 }

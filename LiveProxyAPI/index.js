@@ -2,10 +2,7 @@ import makeStore from './src/store';
 import startServer from './src/server';
 import jsonServer from 'json-server';
 
-import {
-  fetchResource, createResource, destroyResource,
-  patchResource
-} from './src/actions/resource';
+import * as resourceActions from './src/actions/resource';
 
 import post from './definitions/post';
 import user from './definitions/user';
@@ -20,8 +17,10 @@ apiServer.listen(8091);
 export const store = makeStore();
 startServer(store);
 
-store.dispatch(fetchResource({def: post}));
-store.dispatch(createResource({
+// TEST CALLS
+
+store.dispatch(resourceActions['FETCH_RESOURCE']({def: post}));
+store.dispatch(resourceActions['CREATE_RESOURCE']({
   def: post,
   doc: {
     user_id: 1,
@@ -31,7 +30,7 @@ store.dispatch(createResource({
 }));
 
 setTimeout(() => {
-  store.dispatch(patchResource({
+  store.dispatch(resourceActions['PATCH_RESOURCE']({
     def: post,
     doc: {
       title: 'Modified Post',
@@ -41,6 +40,6 @@ setTimeout(() => {
   }));
 }, 2000);
 
-store.dispatch(fetchResource({def: comment}));
-store.dispatch(fetchResource({def: user}));
+store.dispatch(resourceActions['FETCH_RESOURCE']({def: comment}));
+store.dispatch(resourceActions['FETCH_RESOURCE']({def: user}));
 // store.dispatch({type: 'NEXT'});
