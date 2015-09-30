@@ -16,6 +16,7 @@ export class Posts extends React.Component {
 
     this._toggleModal = this._toggleModal.bind(this);
     this._handleCreate = this._handleCreate.bind(this);
+    this._handleDelete = this._handleDelete.bind(this);
   }
 
   _handleCreate(doc) {
@@ -24,6 +25,15 @@ export class Posts extends React.Component {
     add({
       def: post,
       doc,
+    });
+  }
+
+  _handleDelete(id) {
+    const { destroy } = this.props;
+
+    destroy({
+      def: post,
+      id,
     });
   }
 
@@ -40,6 +50,9 @@ export class Posts extends React.Component {
           return (
             <Panel header={posts[key].title}>
               <p>{posts[key].body}</p>
+              <Button onClick={this._handleDelete.bind(null, posts[key].id)}>
+                Delete
+              </Button>
             </Panel>
           );
         })}
