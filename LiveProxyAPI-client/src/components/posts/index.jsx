@@ -1,11 +1,12 @@
 import React from 'react';
-import { Panel, Button, PageHeader } from 'react-bootstrap';
+import { Button, PageHeader } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
 import mapDispatchToProps from '../../mapDispatchToProps';
 
 import CreateModal from './create';
 import post from '../../definitions/post';
+import Post from './post';
 
 export class Posts extends React.Component {
   constructor(props) {
@@ -42,19 +43,22 @@ export class Posts extends React.Component {
   }
 
   render() {
-    const { posts={} } = this.props;
+    const { posts={}, comments=[] } = this.props;
     return (
       <div>
         <PageHeader>Posts</PageHeader>
+
         {Object.keys(posts).map(key => {
+          const obj = posts[key];
           return (
-            <Panel header={posts[key].title}>
-              <p>{posts[key].body}</p>
-              <Button onClick={this._handleDelete.bind(null, posts[key].id)}>
-                Delete
-              </Button>
-            </Panel>
-          );
+            <Post
+              onDelete={this._handleDelete}
+              comments={comments.filter(comment => {
+                return comment.post_id === obj.id;
+              })}
+              data={obj}
+            />
+            );
         })}
 
         <Button
@@ -76,6 +80,7 @@ export class Posts extends React.Component {
 function mapStateToProps(state) {
   return {
     posts: state.getIn(['collections', 'posts'], Map()).toJS(),
+    comments: state.getIn(['collections', 'comments'], Map()).toArray().toJS(),
   };
 }
 
