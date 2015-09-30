@@ -2,7 +2,7 @@ import {
   CREATE_RESOURCE,
   DESTROY_RESOURCE,
   PATCH_RESOURCE,
-  } from '../actions/resource';
+  } from '../constants/resources';
 
 import { fromJS, Map } from 'immutable';
 

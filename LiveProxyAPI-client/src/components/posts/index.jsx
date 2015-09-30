@@ -2,9 +2,10 @@ import React from 'react';
 import { Panel, Button, PageHeader } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Map } from 'immutable';
-import * as actionCreators from '../../actions/action_creators';
+import mapDispatchToProps from '../../mapDispatchToProps';
 
 import CreateModal from './create';
+import post from '../../definitions/post';
 
 export class Posts extends React.Component {
   constructor(props) {
@@ -14,10 +15,16 @@ export class Posts extends React.Component {
     };
 
     this._toggleModal = this._toggleModal.bind(this);
+    this._handleCreate = this._handleCreate.bind(this);
   }
 
-  _handleCreate(post) {
-    console.log(post);
+  _handleCreate(doc) {
+    const { add } = this.props;
+    console.log(doc);
+    add({
+      def: post,
+      doc,
+    });
   }
 
   _toggleModal(creating) {
@@ -61,5 +68,5 @@ function mapStateToProps(state) {
 
 export const PostsContainer = connect(
   mapStateToProps,
-  actionCreators,
+  mapDispatchToProps,
 )(Posts);
