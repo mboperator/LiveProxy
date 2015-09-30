@@ -4,7 +4,7 @@ import uuid from 'uuid';
 import {
   FETCH_RESOURCE, CREATE_RESOURCE,
   DESTROY_RESOURCE, PATCH_RESOURCE
-} from '../constants/resources';
+} from '../constants/resource';
 
 export default {
   [FETCH_RESOURCE]: (req) => {
