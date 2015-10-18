@@ -19,7 +19,7 @@ export default function() {
 
   apiServer.use('/api/mock', router);
   apiServer.use(jsonServer.defaults);
-  apiServer.listen(8091);
+  apiServer.listen(process.env.PORT || 8080);
 
   const store = makeStore();
   startServer(store);
