@@ -13,7 +13,7 @@ export default class Post extends React.Component {
             </Col>
             <Col xs={1} md={1}>
               <div style={{paddingTop: '10px'}}>
-                <Button onClick={onDelete.bind(null, data.id)}>
+                <Button bsStyle='danger' onClick={onDelete.bind(null, data.id)}>
                   Delete
                 </Button>
               </div>

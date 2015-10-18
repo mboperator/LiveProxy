@@ -62,6 +62,7 @@ export class Posts extends React.Component {
         })}
 
         <Button
+          bsStyle='success'
           onClick={this._toggleModal.bind(null, true)}>
             + New Post
         </Button>
