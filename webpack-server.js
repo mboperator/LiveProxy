@@ -1,4 +1,4 @@
-var webpack = require('webpack');
+  var webpack = require('webpack');
 var devServer = require('webpack-dev-server');
 var config = require('./webpack.hot.config');
 
@@ -11,7 +11,7 @@ var server = new devServer(compiler, {
     noInfo: false,
     lazy: false,
     watchDelay: 20,
-    publicPath: 'http://localhost:8080/assets',
+    publicPath: 'http://localhost:8080/build',
     stats: { colors: true },
 });
 

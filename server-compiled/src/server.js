@@ -23,7 +23,7 @@ var resourceActions = _interopRequireWildcard(_actionsResource);
 function startServer(app, store) {
   var io = _socketIo2['default'].listen(app);
   store.subscribe(function () {
-    io.emit('state', store.getState().toJS());
+    // Insert subscription logic
   });
 
   io.on('connection', function (socket) {

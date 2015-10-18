@@ -1,4 +1,5 @@
 import React from 'react';
+import resourceActions from 'actions/resource';
 import Router, { Route, DefaultRoute } from 'react-router';
 import { Provider } from 'react-redux';
 import App from './components/App';
@@ -17,7 +18,9 @@ const routes = (
 );
 
 const store = getStore();
-store.dispatch();
+
+// Initial fetch
+store.dispatch(resourceActions['FETCH_RESOURCE']);
 
 document.addEventListener('DOMContentLoaded', () => {
   Router.run(routes, Root => {
