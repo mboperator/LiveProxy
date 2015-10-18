@@ -24,8 +24,10 @@
     "webpack-dev-server": "^1.11.0"
   },
   "dependencies": {
+    "axios": "^0.7.0",
     "elemental": "^0.4.8",
     "immutable": "^3.7.5",
+    "q": "^1.4.1",
     "react": "^0.13.3",
     "react-bootstrap": "^0.25.2",
     "react-redux": "^2.1.2",

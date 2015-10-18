@@ -1,3 +1,4 @@
+import * as apiRequest from '../services/apiRequest';
 import uuid from 'uuid';
 
 import {
@@ -16,11 +17,11 @@ export default {
   [FETCH_RESOURCE]: (req) => {
     return {
       type: FETCH_RESOURCE,
-      def: req.def,
       meta: {
         def: req.def,
-        remote: true,
       },
+      payload: null,
+      promise: apiRequest.fetch(req),
     };
   },
 
@@ -31,36 +32,33 @@ export default {
 
     return {
       type: CREATE_RESOURCE,
-      def: req.def,
       meta: {
         def: req.def,
-        remote: true,
       },
-      doc: req.doc,
+      payload: req.doc,
+      promise: apiRequest.create(req),
     };
   },
 
   [DESTROY_RESOURCE]: (req) => {
     return {
       type: DESTROY_RESOURCE,
-      def: req.def,
       meta: {
         def: req.def,
-        remote: true,
       },
       id: req.id,
+      promise: apiRequest.destroy(req),
     };
   },
 
   [PATCH_RESOURCE]: (req) => {
     return {
       type: PATCH_RESOURCE,
-      def: req.def,
       meta: {
         def: req.def,
-        remote: true,
       },
-      doc: req.doc,
+      payload: req.doc,
+      promise: apiRequest.patch(req),
     };
   },
 };
