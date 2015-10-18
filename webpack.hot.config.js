@@ -42,6 +42,10 @@ module.exports = {
 
   resolve: {
     extensions: ['', '.js', '.jsx', '.json', '.css', '.sass'],
+    modulesDirectories: [
+      '_shared',
+      'node_modules',
+    ],
   },
 
   plugins: [

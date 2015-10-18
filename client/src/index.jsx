@@ -16,10 +16,13 @@ const routes = (
   </Route>
 );
 
+const store = getStore();
+store.dispatch();
+
 document.addEventListener('DOMContentLoaded', () => {
   Router.run(routes, Root => {
     React.render(
-      <Provider store={getStore()}>
+      <Provider store={store}>
         {() => <Root/>}
       </Provider>,
       document.getElementById('app')

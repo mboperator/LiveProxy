@@ -5,7 +5,7 @@ export default function startServer(app, store) {
   const io = socket.listen(app);
   store.subscribe(
     () => {
-      io.emit('state', store.getState().toJS());
+      // Insert subscription logic
     }
   );
 
