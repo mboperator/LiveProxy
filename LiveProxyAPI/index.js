@@ -1,6 +1,9 @@
 import makeStore from './src/store';
 import startServer from './src/server';
 import jsonServer from 'json-server';
+import v1Router from './src/services/routes.js';
+import express from 'express';
+
 
 import * as resourceActions from './src/actions/resource';
 
@@ -11,10 +14,22 @@ const apiServer = jsonServer.create();
 const router = jsonServer.router(require('./db.json'));
 
 apiServer.use('/api/mock', router);
+
 apiServer.listen(8091);
 
 export const store = makeStore();
 startServer(store);
+
+//express REST API
+let app = express();
+app.use('/api/v1', v1Router(store));
+var server = app.listen(8092, function () {
+  var host = server.address().address;
+  var port = server.address().port;
+
+  console.log('Example app listening at http://%s:%s', host, port);
+});
+
 
 // TEST CALLS
 
