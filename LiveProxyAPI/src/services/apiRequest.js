@@ -1,7 +1,7 @@
 import axios from 'axios';
 import q from 'q';
 
-const BASE_URL = 'http://liveproxy-rails-example.herokuapp.com/';
+const BASE_URL = 'http://liveproxy-rails-example.herokuapp.com';
 const API_PATH = 'api/v1/';
 
 function pathForResource(def) {

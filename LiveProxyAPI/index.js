@@ -4,9 +4,8 @@ import jsonServer from 'json-server';
 
 import * as resourceActions from './src/actions/resource';
 
-import post from './definitions/post';
-import user from './definitions/user';
-import comment from './definitions/comment';
+import story from './definitions/story';
+import sentence from './definitions/sentence';
 
 const apiServer = jsonServer.create();
 const router = jsonServer.router(require('./db.json'));
@@ -19,27 +18,19 @@ startServer(store);
 
 // TEST CALLS
 
-store.dispatch(resourceActions['FETCH_RESOURCE']({def: post}));
+store.dispatch(resourceActions['FETCH_RESOURCE']({def: story}));
+store.dispatch(resourceActions['FETCH_RESOURCE']({def: sentence}));
 // store.dispatch(resourceActions['CREATE_RESOURCE']({
-//   def: post,
+//   def: story,
 //   doc: {
-//     user_id: 1,
-//     title: 'New Post',
-//     body: 'Another Post',
+//     title: 'The story of javascript churn',
 //   },
 // }));
 
-// setTimeout(() => {
-//   store.dispatch(resourceActions['PATCH_RESOURCE']({
-//     def: post,
-//     doc: {
-//       title: 'Modified Post',
-//       body: 'Post modified',
-//       id: 1,
-//     },
-//   }));
-// }, 2000);
-
-store.dispatch(resourceActions['FETCH_RESOURCE']({def: comment}));
-store.dispatch(resourceActions['FETCH_RESOURCE']({def: user}));
-// store.dispatch({type: 'NEXT'});
+// store.dispatch(resourceActions['CREATE_RESOURCE']({
+//   def: sentence,
+//   doc: {
+//     story_id: 1,
+//     content: 'there was a server that used all of the buzzwords',
+//   },
+// }));

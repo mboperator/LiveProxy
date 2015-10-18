@@ -7,9 +7,13 @@ const definition = {
   },
   parent: 'story',
   payloadFormatter(sentence) {
-    const { story_id } = sentence;
+    const { story_id, ... rest } = sentence;
+    console.log({
+      sentence: rest,
+      story_id,
+    });
     return {
-      sentence,
+      sentence: rest,
       story_id,
     };
   },
