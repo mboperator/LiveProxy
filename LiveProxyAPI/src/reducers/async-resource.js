@@ -36,13 +36,13 @@ export default {
   [PATCH_RESOURCE_SUCCESS]: (state, action) => {
     return state;
   },
-  [FETCH_RESOURCE_SUCCESS]: (state, action) => {
-    const { result, meta } = action;
+  [FETCH_RESOURCE_SUCCESS]: (state, { result: payload, meta }) => {
     const {
       def,
     } = meta;
-
+    const result = payload[def.keys.plural];
     const resourceName = def.name;
+
     const updates = result.reduce((memo, object) => {
       return memo.set(object.id, object);
     }, Map());

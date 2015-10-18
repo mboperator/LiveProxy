@@ -20,17 +20,17 @@ startServer(store);
 
 store.dispatch(resourceActions['FETCH_RESOURCE']({def: story}));
 store.dispatch(resourceActions['FETCH_RESOURCE']({def: sentence}));
-// store.dispatch(resourceActions['CREATE_RESOURCE']({
-//   def: story,
-//   doc: {
-//     title: 'The story of javascript churn',
-//   },
-// }));
+store.dispatch(resourceActions['CREATE_RESOURCE']({
+  def: story,
+  doc: {
+    title: 'The story of javascript churn',
+  },
+}));
 
-// store.dispatch(resourceActions['CREATE_RESOURCE']({
-//   def: sentence,
-//   doc: {
-//     story_id: 1,
-//     content: 'there was a server that used all of the buzzwords',
-//   },
-// }));
+store.dispatch(resourceActions['CREATE_RESOURCE']({
+  def: sentence,
+  doc: {
+    story_id: 1,
+    content: 'there was a server that used all of the buzzwords',
+  },
+}));

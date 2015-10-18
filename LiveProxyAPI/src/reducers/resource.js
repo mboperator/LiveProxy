@@ -18,7 +18,7 @@ function upsert(state, action) {
 
   const resourceName = def.name;
   const map = fromJS(payload);
-
+  console.log('upsert', action);
   return state.updateIn(
     ['collections', resourceName],
     Map(),
