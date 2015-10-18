@@ -9,7 +9,7 @@
     "test": "mocha --compilers js:babel/register --recursive",
     "webpack:watch": "./node_modules/.bin/webpack-dev-server",
     "compile:client": "webpack",
-    "compile:server": "babel server --out-file index-compiled.js",
+    "compile:server": "babel server --out-dir server-compiled",
     "test:watch": "npm run test -- --watch",
     "dev": "npm run webpack:watch & npm run start"
   },

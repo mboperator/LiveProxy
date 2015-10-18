@@ -20,10 +20,6 @@ var _jsonServer = require('json-server');
 
 var _jsonServer2 = _interopRequireDefault(_jsonServer);
 
-var _fs = require('fs');
-
-var _fs2 = _interopRequireDefault(_fs);
-
 var _srcActionsResource = require('./src/actions/resource');
 
 var resourceActions = _interopRequireWildcard(_srcActionsResource);
@@ -50,7 +46,7 @@ exports['default'] = function () {
 
   apiServer.use('/api/mock', router);
   apiServer.use(_jsonServer2['default'].defaults);
-  apiServer.listen(8091);
+  apiServer.listen(process.env.PORT || 8091);
 
   var store = (0, _srcStore2['default'])();
   (0, _srcServer2['default'])(store);
