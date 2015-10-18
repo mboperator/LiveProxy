@@ -8,7 +8,7 @@ module.exports = {
   },
 
   output: {
-    path: './public',
+    path: './public/js',
     filename: 'bundle.js',
   },
 
@@ -16,7 +16,7 @@ module.exports = {
     loaders: [
       {
         test: [/\.js$/, /\.jsx$/],
-        loaders: ['react-hot', 'babel-loader?stage=0'],
+        loaders: ['babel-loader?stage=0'],
         exclude: /node_modules/,
       },
       {

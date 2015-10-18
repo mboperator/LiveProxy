@@ -1,14 +1,15 @@
 {
-  "name": "react-redux-boilerplate",
+  "name": "liveproxy-api-example",
   "version": "1.0.0",
   "description": "Redux Webpack React Hotloader",
   "main": "index.js",
   "scripts": {
-    "start": "babel-node index.js",
-    "deploy": "webpack:build; git push heroku master",
+    "start": "node index.js",
+    "deploy": "npm run compile:client; npm run compile:server; git push heroku master",
     "test": "mocha --compilers js:babel/register --recursive",
     "webpack:watch": "./node_modules/.bin/webpack-dev-server",
-    "webpack:build": "webpack",
+    "compile:client": "webpack",
+    "compile:server": "babel server --out-file index-compiled.js",
     "test:watch": "npm run test -- --watch",
     "dev": "npm run webpack:watch & npm run start"
   },
@@ -23,12 +24,13 @@
   "license": "ISC",
   "devDependencies": {
     "babel": "^5.8.23",
-    "chai": "^3.2.0",
-    "chai-immutable": "^1.3.0",
-    "mocha": "^2.3.2",
     "babel-core": "^5.8.24",
     "babel-loader": "^5.3.2",
+    "chai": "^3.2.0",
+    "chai-immutable": "^1.3.0",
     "jsdom": "^6.5.0",
+    "json-loader": "^0.5.3",
+    "mocha": "^2.3.2",
     "react-hot-loader": "^1.3.0",
     "webpack": "^1.12.1",
     "webpack-dev-server": "^1.11.0"

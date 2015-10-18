@@ -1,3 +1,2 @@
-import server from './server';
-
+var server = require('./server-compiled');
 server();
