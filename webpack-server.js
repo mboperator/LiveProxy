@@ -1,6 +1,6 @@
 var webpack = require('webpack');
 var devServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+var config = require('./webpack.hot.config');
 
 var compiler = webpack(config);
 

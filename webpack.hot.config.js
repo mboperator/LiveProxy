@@ -4,12 +4,22 @@ var path = require('path');
 module.exports = {
   context: path.resolve(__dirname + '/client'),
   entry: {
-    app: './src/index.jsx',
+    app: [
+      'webpack-dev-server/client?http://localhost:8080/',
+      'webpack/hot/dev-server',
+      './src/index.jsx',
+    ],
   },
 
   output: {
-    path: './public',
+    path: './public/build',
     filename: 'bundle.js',
+    publicPath: 'http://localhost:8080/build/',
+  },
+
+  devServer: {
+    contentBase: './public',
+    publicPath: 'http://localhost:8080/build/',
   },
 
   module: {
@@ -35,6 +45,11 @@ module.exports = {
   },
 
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
   ],
+
+  debug: true,
+
+  devtool: 'eval-source-map',
 };
