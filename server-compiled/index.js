@@ -24,6 +24,10 @@ var _jsonServer = require('json-server');
 
 var _jsonServer2 = _interopRequireDefault(_jsonServer);
 
+var _srcServicesRoutesJs = require('./src/services/routes.js');
+
+var _srcServicesRoutesJs2 = _interopRequireDefault(_srcServicesRoutesJs);
+
 var _srcActionsResource = require('./src/actions/resource');
 
 var resourceActions = _interopRequireWildcard(_srcActionsResource);
@@ -51,6 +55,7 @@ exports['default'] = function () {
     res.sendFile(_path2['default'].join(__dirname, '../', 'client') + '/index.html');
   });
   apiServer.use('/api/mock', router);
+  apiServer.use('/api/v1', (0, _srcServicesRoutesJs2['default'])(store));
   apiServer.use(_jsonServer2['default'].defaults);
 
   var server = _http2['default'].createServer(apiServer);

@@ -11,7 +11,7 @@
     "compile:client": "webpack",
     "compile:server": "babel server --out-dir server-compiled",
     "test:watch": "npm run test -- --watch",
-    "dev": "npm run webpack:watch & npm run start"
+    "dev": "npm run webpack:watch & node index.js"
   },
   "keywords": [
     "react",
