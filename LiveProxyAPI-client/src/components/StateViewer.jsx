@@ -13,9 +13,11 @@ export class StateViewer extends React.Component {
     });
   }
   render() {
-    const { posts, users, comments } = this.props;
+    const { posts, users, comments, stories, senetences } = this.props;
     return (
       <div>
+        {JSON.stringify(stories)}
+        {JSON.stringify(senetences)}
         {JSON.stringify(posts)}
         {JSON.stringify(users)}
         {JSON.stringify(comments)}
@@ -26,6 +28,8 @@ export class StateViewer extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    stories: state.getIn(['collections', 'stories']),
+    sentences: state.getIn(['collections', 'sentences']),
     posts: state.getIn(['collections', 'posts']),
     users: state.getIn(['collections', 'users']),
     comments: state.getIn(['collections', 'comments']),

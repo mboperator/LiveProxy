@@ -15,6 +15,9 @@ export default class NavBar extends React.Component {
             <NavItem eventKey={1} href='#/posts'>
                 Posts
             </NavItem>
+            <NavItem eventKey={1} href='#/stories'>
+                Stories
+            </NavItem>
             <NavDropdown title='JSON API'>
               <MenuItem href='http://localhost:8091/api/mock/posts'>
                 Posts

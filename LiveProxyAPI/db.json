@@ -1,4 +1,18 @@
 {
+  "stories": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "title": "Once upon a time",
+    }
+  ],
+  "sentences": [
+    {
+      "user_id": 1,
+      "story_id": 1,
+      "content": "cool story"
+    }
+  ],
   "posts": [
     {
       "id": 1,
