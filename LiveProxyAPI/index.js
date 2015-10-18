@@ -2,9 +2,6 @@ import makeStore from './src/store';
 import startServer from './src/server';
 import jsonServer from 'json-server';
 import v1Router from './src/services/routes.js';
-import express from 'express';
-
-
 import * as resourceActions from './src/actions/resource';
 
 import story from './definitions/story';
@@ -12,27 +9,16 @@ import sentence from './definitions/sentence';
 
 const apiServer = jsonServer.create();
 const router = jsonServer.router(require('./db.json'));
+export const store = makeStore();
 
 apiServer.use('/api/mock', router);
+apiServer.use('/api/v1', v1Router(store));
 
 apiServer.listen(8091);
 
-export const store = makeStore();
 startServer(store);
 
-//express REST API
-let app = express();
-app.use('/api/v1', v1Router(store));
-var server = app.listen(8092, function () {
-  var host = server.address().address;
-  var port = server.address().port;
-
-  console.log('Example app listening at http://%s:%s', host, port);
-});
-
-
 // TEST CALLS
-
 store.dispatch(resourceActions['FETCH_RESOURCE']({def: story}));
 store.dispatch(resourceActions['FETCH_RESOURCE']({def: sentence}));
 // store.dispatch(resourceActions['CREATE_RESOURCE']({
