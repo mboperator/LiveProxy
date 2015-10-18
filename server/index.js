@@ -1,3 +1,4 @@
+import http from 'http';
 import makeStore from './src/store';
 import startServer from './src/server';
 import jsonServer from 'json-server';
@@ -18,10 +19,10 @@ export default function() {
   apiServer.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../', 'client') + '/index.html');
   });
-
   apiServer.use('/api/mock', router);
   apiServer.use(jsonServer.defaults);
-  apiServer.listen(process.env.PORT || 8091);
 
-  startServer(apiServer, store);
+  const server = http.createServer(apiServer);
+  startServer(server, store);
+  server.listen(process.env.PORT || 8091);
 }

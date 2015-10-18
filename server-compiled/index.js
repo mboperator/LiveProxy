@@ -8,6 +8,10 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+var _http = require('http');
+
+var _http2 = _interopRequireDefault(_http);
+
 var _srcStore = require('./src/store');
 
 var _srcStore2 = _interopRequireDefault(_srcStore);
@@ -46,12 +50,12 @@ exports['default'] = function () {
   apiServer.get('/', function (req, res) {
     res.sendFile(_path2['default'].join(__dirname, '../', 'client') + '/index.html');
   });
-
   apiServer.use('/api/mock', router);
   apiServer.use(_jsonServer2['default'].defaults);
-  apiServer.listen(process.env.PORT || 8091);
 
-  (0, _srcServer2['default'])(apiServer, store);
+  var server = _http2['default'].createServer(apiServer);
+  (0, _srcServer2['default'])(server, store);
+  server.listen(process.env.PORT || 8091);
 };
 
 module.exports = exports['default'];
