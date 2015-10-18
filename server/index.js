@@ -1,7 +1,6 @@
 import makeStore from './src/store';
 import startServer from './src/server';
 import jsonServer from 'json-server';
-import fs from 'fs';
 
 import * as resourceActions from './src/actions/resource';
 
@@ -19,7 +18,7 @@ export default function() {
 
   apiServer.use('/api/mock', router);
   apiServer.use(jsonServer.defaults);
-  apiServer.listen(process.env.PORT || 8080);
+  apiServer.listen(process.env.PORT || 8091);
 
   const store = makeStore();
   startServer(store);

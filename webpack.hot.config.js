@@ -5,7 +5,7 @@ module.exports = {
   context: path.resolve(__dirname + '/client'),
   entry: {
     app: [
-      'webpack-dev-server/client?http://localhost:8081/',
+      'webpack-dev-server/client?http://localhost:8080/',
       'webpack/hot/dev-server',
       './src/index.jsx',
     ],
@@ -14,12 +14,12 @@ module.exports = {
   output: {
     path: './public/build',
     filename: 'bundle.js',
-    publicPath: 'http://localhost:8081/build/',
+    publicPath: 'http://localhost:8080/build/',
   },
 
   devServer: {
     contentBase: './public',
-    publicPath: 'http://localhost:8081/build/',
+    publicPath: 'http://localhost:8080/build/',
   },
 
   module: {
