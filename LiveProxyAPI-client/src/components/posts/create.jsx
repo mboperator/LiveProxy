@@ -33,7 +33,7 @@ export default class Posts extends React.Component {
             <Input ref='title' type='text' label='Title' placeholder='New post...'/>
             <Input ref='body' type='textarea' placeholder='Hello world'/>
           </form>
-          <Button onClick={this._handleCreate}>Create!</Button>
+          <Button bsStyle='success' onClick={this._handleCreate}>Create!</Button>
         </Body>
       </Modal>
     );

@@ -1,5 +1,4 @@
 import * as apiRequest from '../services/apiRequest';
-import uuid from 'uuid';
 
 import {
   FETCH_RESOURCE, CREATE_RESOURCE,
@@ -19,10 +18,6 @@ export default {
   },
 
   [CREATE_RESOURCE]: (req) => {
-    if (!req.doc.id) {
-      req.doc.id = uuid.v4();
-    }
-
     return {
       type: CREATE_RESOURCE,
       meta: {
