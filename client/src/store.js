@@ -4,8 +4,11 @@ import remoteActionMiddleware from './middleware/remote_action_middleware';
 import { createStore, applyMiddleware } from 'redux';
 import io from 'socket.io-client';
 
-console.log('websock at', `${location.protocol}//${location.hostname}:8090`);
-const socket = io(`${location.protocol}//${location.hostname}:8090`);
+function getPort() {
+  return location.port ? `:${location.port}` : '';
+}
+console.log('websock at', `${location.protocol}//${location.hostname}${getPort()}`);
+const socket = io(`${location.protocol}//${location.hostname}${getPort()}`);
 
 const createStoreWithMiddleware = applyMiddleware(
   remoteActionMiddleware(socket),

@@ -48348,8 +48348,11 @@
 
 	var _socketIoClient2 = _interopRequireDefault(_socketIoClient);
 
-	console.log('websock at', location.protocol + '//' + location.hostname + ':8090');
-	var socket = (0, _socketIoClient2['default'])(location.protocol + '//' + location.hostname + ':8090');
+	function getPort() {
+	  return location.port ? ':' + location.port : '';
+	}
+	console.log('websock at', location.protocol + '//' + location.hostname + getPort());
+	var socket = (0, _socketIoClient2['default'])(location.protocol + '//' + location.hostname + getPort());
 
 	var createStoreWithMiddleware = (0, _redux.applyMiddleware)((0, _middlewareRemote_action_middleware2['default'])(socket))(_redux.createStore);
 
