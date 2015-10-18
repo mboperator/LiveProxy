@@ -1,9 +1,8 @@
-import Server from 'socket.io';
+import socket from 'socket.io';
 import * as resourceActions from './actions/resource';
 
-export default function startServer(store) {
-  const io = new Server().attach(8090);
-
+export default function startServer(app, store) {
+  const io = socket.listen(app);
   store.subscribe(
     () => {
       io.emit('state', store.getState().toJS());

@@ -11,6 +11,9 @@ import path from 'path';
 export default function() {
   const apiServer = jsonServer.create();
   const router = jsonServer.router(require('./db.json'));
+  const store = makeStore();
+  store.dispatch(resourceActions['FETCH_RESOURCE']({def: story}));
+  store.dispatch(resourceActions['FETCH_RESOURCE']({def: sentence}));
 
   apiServer.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../', 'client') + '/index.html');
@@ -20,8 +23,5 @@ export default function() {
   apiServer.use(jsonServer.defaults);
   apiServer.listen(process.env.PORT || 8091);
 
-  const store = makeStore();
-  startServer(store);
-  store.dispatch(resourceActions['FETCH_RESOURCE']({def: story}));
-  store.dispatch(resourceActions['FETCH_RESOURCE']({def: sentence}));
+  startServer(apiServer, store);
 }
