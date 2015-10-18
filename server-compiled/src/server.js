@@ -20,9 +20,8 @@ var _actionsResource = require('./actions/resource');
 
 var resourceActions = _interopRequireWildcard(_actionsResource);
 
-function startServer(store) {
-  var io = new _socketIo2['default']().attach(8090);
-
+function startServer(app, store) {
+  var io = _socketIo2['default'].listen(app);
   store.subscribe(function () {
     io.emit('state', store.getState().toJS());
   });

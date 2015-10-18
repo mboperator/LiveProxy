@@ -39,6 +39,9 @@ var _path2 = _interopRequireDefault(_path);
 exports['default'] = function () {
   var apiServer = _jsonServer2['default'].create();
   var router = _jsonServer2['default'].router(require('./db.json'));
+  var store = (0, _srcStore2['default'])();
+  store.dispatch(resourceActions['FETCH_RESOURCE']({ def: _definitionsStory2['default'] }));
+  store.dispatch(resourceActions['FETCH_RESOURCE']({ def: _definitionsSentence2['default'] }));
 
   apiServer.get('/', function (req, res) {
     res.sendFile(_path2['default'].join(__dirname, '../', 'client') + '/index.html');
@@ -48,10 +51,7 @@ exports['default'] = function () {
   apiServer.use(_jsonServer2['default'].defaults);
   apiServer.listen(process.env.PORT || 8091);
 
-  var store = (0, _srcStore2['default'])();
-  (0, _srcServer2['default'])(store);
-  store.dispatch(resourceActions['FETCH_RESOURCE']({ def: _definitionsStory2['default'] }));
-  store.dispatch(resourceActions['FETCH_RESOURCE']({ def: _definitionsSentence2['default'] }));
+  (0, _srcServer2['default'])(apiServer, store);
 };
 
 module.exports = exports['default'];
