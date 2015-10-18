@@ -1,6 +1,8 @@
 var webpack = require('webpack');
+var path = require('path');
 
 module.exports = {
+  context: path.resolve(__dirname + '/client'),
   entry: {
     app: [
       'webpack-dev-server/client?http://localhost:8080/',
