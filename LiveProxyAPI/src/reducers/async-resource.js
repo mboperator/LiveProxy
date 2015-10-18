@@ -5,7 +5,7 @@ import {
   FETCH_RESOURCE_SUCCESS,
   } from '../constants/async-resource';
 
-import { Map } from 'immutable';
+import { Map, fromJS } from 'immutable';
 
 export default {
   [CREATE_RESOURCE_SUCCESS]: (state, action) => {
@@ -47,13 +47,11 @@ export default {
       return memo.set(object.id, object);
     }, Map());
 
-    return state.updateIn(
-      ['collections', resourceName],
-      Map(),
-      collection => {
-        return collection.mergeDeep(updates);
-      }
-    );
+    return state
+      .setIn(
+        ['collections', resourceName],
+        updates
+      );
   },
 };
 

@@ -1,6 +1,6 @@
 const definition = {
   loading: false,
-  name: 'storys',
+  name: 'stories',
   keys: {
     singular: 'story',
     plural: 'stories',

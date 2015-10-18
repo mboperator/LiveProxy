@@ -38,6 +38,14 @@ export class Stories extends React.Component {
     });
   }
 
+  _handleFetch() {
+    const { fetch } = this.props;
+
+    fetch({
+      def: story,
+    });
+  }
+
   _toggleModal(creating) {
     this.setState({creating});
   }
@@ -51,7 +59,7 @@ export class Stories extends React.Component {
         {Object.keys(stories).map(key => {
           const obj = stories[key];
           return (
-            <Storie
+            <Story
               onDelete={this._handleDelete}
               sentences={sentences.filter(sentence => {
                 return sentence.story_id == obj.id;
@@ -65,6 +73,12 @@ export class Stories extends React.Component {
           onClick={this._toggleModal.bind(null, true)}>
             + New Storie
         </Button>
+
+        <Button
+          onClick={this._handleFetch.bind(this)}>
+            Fetch
+        </Button>
+
 
         <CreateModal
           show={this.state.creating}
@@ -84,7 +98,7 @@ function mapStateToProps(state) {
   };
 }
 
-export const StoriesContaine = connect(
+export const StoriesContainer = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(Stories);

@@ -1,26 +1,43 @@
 0 info it worked if it ends with ok
-1 verbose cli [ '/Users/remyy/.nvm/versions/node/v4.1.2/bin/node',
-1 verbose cli   '/Users/remyy/.nvm/versions/node/v4.1.2/bin/npm',
+1 verbose cli [ 'node',
+1 verbose cli   '/Users/marcusbernales/.nvm/versions/v0.12.0/bin/npm',
 1 verbose cli   'run',
-1 verbose cli   'webpack:watch' ]
-2 info using npm@2.14.4
-3 info using node@v4.1.2
-4 verbose stack Error: missing script: webpack:watch
-4 verbose stack     at run (/Users/remyy/.nvm/versions/node/v4.1.2/lib/node_modules/npm/lib/run-script.js:142:19)
-4 verbose stack     at /Users/remyy/.nvm/versions/node/v4.1.2/lib/node_modules/npm/lib/run-script.js:58:5
-4 verbose stack     at /Users/remyy/.nvm/versions/node/v4.1.2/lib/node_modules/npm/node_modules/read-package-json/read-json.js:345:5
-4 verbose stack     at checkBinReferences_ (/Users/remyy/.nvm/versions/node/v4.1.2/lib/node_modules/npm/node_modules/read-package-json/read-json.js:309:45)
-4 verbose stack     at final (/Users/remyy/.nvm/versions/node/v4.1.2/lib/node_modules/npm/node_modules/read-package-json/read-json.js:343:3)
-4 verbose stack     at then (/Users/remyy/.nvm/versions/node/v4.1.2/lib/node_modules/npm/node_modules/read-package-json/read-json.js:113:5)
-4 verbose stack     at ReadFileContext.<anonymous> (/Users/remyy/.nvm/versions/node/v4.1.2/lib/node_modules/npm/node_modules/read-package-json/read-json.js:284:20)
-4 verbose stack     at ReadFileContext.callback (/Users/remyy/.nvm/versions/node/v4.1.2/lib/node_modules/npm/node_modules/graceful-fs/graceful-fs.js:76:16)
-4 verbose stack     at FSReqWrap.readFileAfterOpen [as oncomplete] (fs.js:303:13)
-5 verbose cwd /Users/remyy/Applications/javascript/LiveProxy/LiveProxyAPI
-6 error Darwin 14.5.0
-7 error argv "/Users/remyy/.nvm/versions/node/v4.1.2/bin/node" "/Users/remyy/.nvm/versions/node/v4.1.2/bin/npm" "run" "webpack:watch"
-8 error node v4.1.2
-9 error npm  v2.14.4
-10 error missing script: webpack:watch
-11 error If you need help, you may report this error at:
-11 error     <https://github.com/npm/npm/issues>
-12 verbose exit [ 1, true ]
+1 verbose cli   'test' ]
+2 info using npm@3.3.6
+3 info using node@v0.12.0
+4 verbose run-script [ 'pretest', 'test', 'posttest' ]
+5 info lifecycle react-redux-boilerplate@1.0.0~pretest: react-redux-boilerplate@1.0.0
+6 silly lifecycle react-redux-boilerplate@1.0.0~pretest: no script for pretest, continuing
+7 info lifecycle react-redux-boilerplate@1.0.0~test: react-redux-boilerplate@1.0.0
+8 verbose lifecycle react-redux-boilerplate@1.0.0~test: unsafe-perm in lifecycle true
+9 verbose lifecycle react-redux-boilerplate@1.0.0~test: PATH: /Users/marcusbernales/.nvm/versions/v0.12.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/marcusbernales/Workspaces/LiveProxy/LiveProxyAPI/node_modules/.bin:/usr/local/heroku/bin:/Users/marcusbernales/.rvm/gems/ruby-2.1.3/bin:/Users/marcusbernales/.rvm/gems/ruby-2.1.3@global/bin:/Users/marcusbernales/.rvm/rubies/ruby-2.1.3/bin:/Users/marcusbernales/.nvm/versions/v0.12.0/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/marcusbernales/.rvm/bin
+10 verbose lifecycle react-redux-boilerplate@1.0.0~test: CWD: /Users/marcusbernales/Workspaces/LiveProxy/LiveProxyAPI
+11 silly lifecycle react-redux-boilerplate@1.0.0~test: Args: [ '-c', 'mocha --compilers js:babel/register --recursive' ]
+12 silly lifecycle react-redux-boilerplate@1.0.0~test: Returned: code: 1  signal: null
+13 info lifecycle react-redux-boilerplate@1.0.0~test: Failed to exec test script
+14 verbose stack Error: react-redux-boilerplate@1.0.0 test: `mocha --compilers js:babel/register --recursive`
+14 verbose stack Exit status 1
+14 verbose stack     at EventEmitter.<anonymous> (/Users/marcusbernales/.nvm/versions/v0.12.0/lib/node_modules/npm/lib/utils/lifecycle.js:233:16)
+14 verbose stack     at EventEmitter.emit (events.js:110:17)
+14 verbose stack     at ChildProcess.<anonymous> (/Users/marcusbernales/.nvm/versions/v0.12.0/lib/node_modules/npm/lib/utils/spawn.js:24:14)
+14 verbose stack     at ChildProcess.emit (events.js:110:17)
+14 verbose stack     at maybeClose (child_process.js:1008:16)
+14 verbose stack     at Process.ChildProcess._handle.onexit (child_process.js:1080:5)
+15 verbose pkgid react-redux-boilerplate@1.0.0
+16 verbose cwd /Users/marcusbernales/Workspaces/LiveProxy/LiveProxyAPI
+17 error Darwin 14.1.0
+18 error argv "node" "/Users/marcusbernales/.nvm/versions/v0.12.0/bin/npm" "run" "test"
+19 error node v0.12.0
+20 error npm  v3.3.6
+21 error code ELIFECYCLE
+22 error react-redux-boilerplate@1.0.0 test: `mocha --compilers js:babel/register --recursive`
+22 error Exit status 1
+23 error Failed at the react-redux-boilerplate@1.0.0 test script 'mocha --compilers js:babel/register --recursive'.
+23 error This is most likely a problem with the react-redux-boilerplate package,
+23 error not with npm itself.
+23 error Tell the author that this fails on your system:
+23 error     mocha --compilers js:babel/register --recursive
+23 error You can get their info via:
+23 error     npm owner ls react-redux-boilerplate
+23 error There is likely additional logging output above.
+24 verbose exit [ 1, true ]
