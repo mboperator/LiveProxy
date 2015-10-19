@@ -1,11 +1,10 @@
 import socket from 'socket.io';
-import * as resourceActions from './actions/resource';
 
 export default function startServer(app, store) {
   const io = socket.listen(app);
   store.subscribe(
     () => {
-      // Insert subscription logic
+      socket.emit('state', store.getState().toJS());
     }
   );
 
