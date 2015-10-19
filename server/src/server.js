@@ -4,7 +4,7 @@ export default function startServer(app, store) {
   const io = socket.listen(app);
   store.subscribe(
     () => {
-      socket.emit('state', store.getState().toJS());
+      io.emit('state', store.getState().toJS());
     }
   );
 

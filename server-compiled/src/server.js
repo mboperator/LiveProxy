@@ -14,7 +14,7 @@ var _socketIo2 = _interopRequireDefault(_socketIo);
 function startServer(app, store) {
   var io = _socketIo2['default'].listen(app);
   store.subscribe(function () {
-    _socketIo2['default'].emit('state', store.getState().toJS());
+    io.emit('state', store.getState().toJS());
   });
 
   io.on('connection', function (socket) {
