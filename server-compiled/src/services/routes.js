@@ -81,9 +81,8 @@ function createRouter(store) {
         result: data,
         readyState: 'success'
       });
+      res.send(data);
     });
-
-    res.send(req.body);
   });
 
   router.patch(storyRoute, function (req, res) {
