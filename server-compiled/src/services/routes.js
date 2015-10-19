@@ -9,6 +9,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 var _store = require('../store');
 
 var _store2 = _interopRequireDefault(_store);
@@ -46,20 +48,9 @@ function createRouter(store) {
     var type = action.type;
     var payload = action.payload;
 
-    apiRequest.fetch({ def: _definitionsStory2['default'] }).then(function (_ref) {
-      var data = _ref.data;
-
-      console.log('data', data);
-      store.dispatch({
-        type: type + '_SUCCESS',
-        meta: action.meta,
-        payload: payload,
-        result: data,
-        readyState: 'success'
-      });
-      console.log("DA");
-      res.send(data);
-    });
+    var resources = store.getState().getIn(['collections']).toJS();
+    console.log('resources');
+    res.send(_defineProperty({}, _definitionsStory2['default'].keys.plural, resources));
   });
 
   router['delete']('/stories/:id', function (req, res) {

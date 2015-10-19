@@ -13,21 +13,9 @@ const sentenceRoute = '/sentences';
 export default function createRouter(store) {
 
   router.get(storyRoute, function (req, res) {
-    const actionRequest = {def: story};
-    const action = resourceActions['FETCH_RESOURCE'](actionRequest);
-    const { type, payload } = action;
-    apiRequest.fetch({def: story}).then( ({data}) => {
-      console.log('data', data);
-      store.dispatch({
-        type: `${type}_SUCCESS`,
-        meta: action.meta,
-        payload: payload,
-        result: data,
-        readyState: 'success',
-      });
-      console.log("DA");
-      res.send(data);
-    })
+    const resources = store.getState().getIn(['collections']).toJS();
+    console.log('resources');
+    res.send({[story.keys.plural]: resources});
   });
 
   router.delete('/stories/:id', function (req, res) {
