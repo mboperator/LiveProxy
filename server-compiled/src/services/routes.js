@@ -43,13 +43,7 @@ var sentenceRoute = '/sentences';
 function createRouter(store) {
 
   router.get(storyRoute, function (req, res) {
-    var actionRequest = { def: _definitionsStory2['default'] };
-    var action = resourceActions['FETCH_RESOURCE'](actionRequest);
-    var type = action.type;
-    var payload = action.payload;
-
-    var resources = store.getState().getIn(['collections']).toJS();
-    console.log('resources');
+    var resources = store.getState().getIn(['collections', _definitionsStory2['default'].name]).toList().toJS();
     res.send(_defineProperty({}, _definitionsStory2['default'].keys.plural, resources));
   });
 
@@ -87,8 +81,9 @@ function createRouter(store) {
         result: data,
         readyState: 'success'
       });
-      res.send(data);
     });
+
+    res.send(req.body);
   });
 
   router.patch(storyRoute, function (req, res) {

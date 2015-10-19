@@ -13,8 +13,7 @@ const sentenceRoute = '/sentences';
 export default function createRouter(store) {
 
   router.get(storyRoute, function (req, res) {
-    const resources = store.getState().getIn(['collections']).toJS();
-    console.log('resources');
+    const resources = store.getState().getIn(['collections', story.name]).toList().toJS();
     res.send({[story.keys.plural]: resources});
   });
 
@@ -49,8 +48,9 @@ export default function createRouter(store) {
         result: data,
         readyState: 'success',
       });
-      res.send(data);
     });
+
+    res.send(req.body);
   });
 
   router.patch(storyRoute, function (req, res) {
