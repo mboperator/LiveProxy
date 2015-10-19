@@ -41,6 +41,7 @@ export default function createRouter(store) {
     const { type, payload } = action;
 
     apiRequest.create(actionRequest).then( (data) => {
+      res.send(data);
       store.dispatch({
         type: `${type}_SUCCESS`,
         meta: action.meta,
@@ -48,7 +49,6 @@ export default function createRouter(store) {
         result: data,
         readyState: 'success',
       });
-      res.send(data);
     });
 
   });

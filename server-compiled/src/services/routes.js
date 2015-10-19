@@ -74,6 +74,7 @@ function createRouter(store) {
     var payload = action.payload;
 
     apiRequest.create(actionRequest).then(function (data) {
+      res.send(data);
       store.dispatch({
         type: type + '_SUCCESS',
         meta: action.meta,
@@ -81,7 +82,6 @@ function createRouter(store) {
         result: data,
         readyState: 'success'
       });
-      res.send(data);
     });
   });
 
