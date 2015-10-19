@@ -1,4 +1,4 @@
-import * as apiRequest from '../services/apiRequest';
+import * as apiRequest from 'services/apiRequest';
 import uuid from 'uuid';
 
 import {

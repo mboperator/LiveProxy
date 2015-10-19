@@ -4,6 +4,7 @@ import startServer from './src/server';
 import jsonServer from 'json-server';
 import v1Router from './src/services/routes.js';
 import * as resourceActions from './src/actions/resource';
+import bodyParser from 'body-parser';
 
 import story from './definitions/story';
 import sentence from './definitions/sentence';
@@ -20,8 +21,9 @@ export default function() {
     res.sendFile(path.join(__dirname, '../', 'client') + '/index.html');
   });
   apiServer.use('/api/mock', router);
-  apiServer.use('/api/v1', v1Router(store));
   apiServer.use(jsonServer.defaults);
+  apiServer.use(bodyParser.json());
+  apiServer.use('/api/v1', v1Router(store));
 
   const server = http.createServer(apiServer);
   startServer(server, store);

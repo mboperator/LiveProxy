@@ -7,7 +7,7 @@
     "start": "node index.js",
     "deploy": "npm run compile:client; npm run compile:server; git push heroku master",
     "test": "mocha --compilers js:babel/register --recursive",
-    "webpack:watch": "./node_modules/.bin/webpack-dev-server",
+    "webpack:watch": "./node_modules/.bin/webpack-dev-server --config webpack.hot.config.js --port 8081",
     "compile:client": "webpack",
     "compile:server": "babel server --out-dir server-compiled",
     "test:watch": "npm run test -- --watch",
@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "axios": "^0.5.4",
+    "body-parser": "^1.14.1",
     "elemental": "^0.4.8",
     "express": "^4.13.3",
     "immutable": "^3.7.5",
@@ -48,7 +49,7 @@
     "react-router": "^0.13.3",
     "redux": "^3.0.0",
     "redux-actions": "^0.8.0",
-    "redux-logger": "^1.0.8",
+    "redux-logger": "^1.0.9",
     "socket.io": "^1.3.6",
     "socket.io-client": "^1.3.6",
     "uuid": "^2.0.1"

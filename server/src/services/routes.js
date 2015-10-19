@@ -8,7 +8,7 @@ import express from 'express';
 var router = express.Router();
 
 const storyRoute = '/stories';
-const sentenceRoute = '/sentenses';
+const sentenceRoute = '/sentences';
 
 export default function createRouter(store) {
 
@@ -30,8 +30,9 @@ export default function createRouter(store) {
     })
   });
 
-  router.delete(storyRoute, function (req, res) {
-    const actionRequest = {def: story, id: req.id};
+  router.delete('/stories/:id', function (req, res) {
+    console.log('Deleting', req.params.id);
+    const actionRequest = {def: story, id: req.params.id};
     const action = resourceActions['DESTROY_RESOURCE'](actionRequest);
     const { type, payload } = action;
     apiRequest.destroy(actionRequest).then( (data) => {
@@ -42,14 +43,16 @@ export default function createRouter(store) {
         result: data,
         readyState: 'success',
       });
-      res.sendStatus(200)
-    })
+      res.sendStatus(200);
+    });
   });
 
   router.post(storyRoute, function (req, res) {
-    const actionRequest = {def: story, doc: req};
+    console.log('CREATE', req.body);
+    const actionRequest = {def: story, doc: req.body};
     const action = resourceActions['CREATE_RESOURCE'](actionRequest);
     const { type, payload } = action;
+
     apiRequest.create(actionRequest).then( (data) => {
       store.dispatch({
         type: `${type}_SUCCESS`,
@@ -58,12 +61,12 @@ export default function createRouter(store) {
         result: data,
         readyState: 'success',
       });
-      res.send(data)
-    })
+      res.send(data);
+    });
   });
 
   router.patch(storyRoute, function (req, res) {
-    const actionRequest = {def: story, doc: req};
+    const actionRequest = {def: story, doc: req.body};
     const action = resourceActions['PATCH_RESOURCE'](actionRequest);
     const { type, payload } = action;
     apiRequest.patch(actionRequest).then( (data) => {

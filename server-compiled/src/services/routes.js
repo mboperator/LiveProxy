@@ -36,7 +36,7 @@ var _express2 = _interopRequireDefault(_express);
 var router = _express2['default'].Router();
 
 var storyRoute = '/stories';
-var sentenceRoute = '/sentenses';
+var sentenceRoute = '/sentences';
 
 function createRouter(store) {
 
@@ -62,8 +62,9 @@ function createRouter(store) {
     });
   });
 
-  router['delete'](storyRoute, function (req, res) {
-    var actionRequest = { def: _definitionsStory2['default'], id: req.id };
+  router['delete']('/stories/:id', function (req, res) {
+    console.log('Deleting', req.params.id);
+    var actionRequest = { def: _definitionsStory2['default'], id: req.params.id };
     var action = resourceActions['DESTROY_RESOURCE'](actionRequest);
     var type = action.type;
     var payload = action.payload;
@@ -81,7 +82,8 @@ function createRouter(store) {
   });
 
   router.post(storyRoute, function (req, res) {
-    var actionRequest = { def: _definitionsStory2['default'], doc: req };
+    console.log('CREATE', req.body);
+    var actionRequest = { def: _definitionsStory2['default'], doc: req.body };
     var action = resourceActions['CREATE_RESOURCE'](actionRequest);
     var type = action.type;
     var payload = action.payload;
@@ -99,7 +101,7 @@ function createRouter(store) {
   });
 
   router.patch(storyRoute, function (req, res) {
-    var actionRequest = { def: _definitionsStory2['default'], doc: req };
+    var actionRequest = { def: _definitionsStory2['default'], doc: req.body };
     var action = resourceActions['PATCH_RESOURCE'](actionRequest);
     var type = action.type;
     var payload = action.payload;

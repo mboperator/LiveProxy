@@ -8,9 +8,14 @@ import * as actions from './actions/action_creators';
 
 const store = getStore();
 
-export default {
-  add: req => store.dispatch(actions[CREATE_RESOURCE](req)),
-  destroy: req => store.dispatch(actions[DESTROY_RESOURCE](req)),
-  patch: req => store.dispatch(actions[PATCH_RESOURCE](req)),
-  fetch: req => store.dispatch(actions[FETCH_RESOURCE](req)),
-};
+export default function mapDispatchToProps(dispatch) {
+  return {
+    add: req => dispatch(actions[CREATE_RESOURCE](req)),
+    destroy: req => dispatch(actions[DESTROY_RESOURCE](req)),
+    patch: req => dispatch(actions[PATCH_RESOURCE](req)),
+    fetch: req => {
+      const action = actions[FETCH_RESOURCE](req);
+      dispatch(action);
+    },
+  };
+}

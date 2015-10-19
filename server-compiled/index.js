@@ -32,6 +32,10 @@ var _srcActionsResource = require('./src/actions/resource');
 
 var resourceActions = _interopRequireWildcard(_srcActionsResource);
 
+var _bodyParser = require('body-parser');
+
+var _bodyParser2 = _interopRequireDefault(_bodyParser);
+
 var _definitionsStory = require('./definitions/story');
 
 var _definitionsStory2 = _interopRequireDefault(_definitionsStory);
@@ -55,8 +59,9 @@ exports['default'] = function () {
     res.sendFile(_path2['default'].join(__dirname, '../', 'client') + '/index.html');
   });
   apiServer.use('/api/mock', router);
-  apiServer.use('/api/v1', (0, _srcServicesRoutesJs2['default'])(store));
   apiServer.use(_jsonServer2['default'].defaults);
+  apiServer.use(_bodyParser2['default'].json());
+  apiServer.use('/api/v1', (0, _srcServicesRoutesJs2['default'])(store));
 
   var server = _http2['default'].createServer(apiServer);
   (0, _srcServer2['default'])(server, store);

@@ -1,5 +1,6 @@
 import React from 'react';
-import resourceActions from 'actions/resource';
+import {FETCH_RESOURCE as fetch} from './actions/action_creators';
+import story from 'definitions/story';
 import Router, { Route, DefaultRoute } from 'react-router';
 import { Provider } from 'react-redux';
 import App from './components/App';
@@ -19,8 +20,10 @@ const routes = (
 
 const store = getStore();
 
-// Initial fetch
-store.dispatch(resourceActions['FETCH_RESOURCE']);
+setTimeout(() => {
+  const action = fetch({def: story});
+  store.dispatch(action);
+}, 0);
 
 document.addEventListener('DOMContentLoaded', () => {
   Router.run(routes, Root => {

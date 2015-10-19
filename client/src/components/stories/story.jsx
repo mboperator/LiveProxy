@@ -1,7 +1,7 @@
 import React from 'react';
 import { Panel, Button, Row, Col } from 'react-bootstrap';
 
-export default class Stories extends React.Component {
+export default class Story extends React.Component {
   render() {
     const { data, onDelete, sentences } = this.props;
     return (
