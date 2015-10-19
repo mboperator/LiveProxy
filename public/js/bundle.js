@@ -20585,7 +20585,7 @@
 
 	var _q2 = _interopRequireDefault(_q);
 
-	var BASE_URL = '/';
+	var BASE_URL = 'http://liveproxy-api-example.herokuapp.com';
 	// const BASE_URL = 'http://localhost:8091';
 	var API_PATH = 'api/v1/';
 
