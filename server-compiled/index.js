@@ -51,7 +51,6 @@ var _path2 = _interopRequireDefault(_path);
 var _ramda = require('ramda');
 
 function setupRoutes(app) {
-  console.log('setupRoutes');
   var jsonApi = _jsonServer2['default'].router(require('./db.json'));
 
   app.use('/api/v1', (0, _srcServicesRoutesJs2['default'])(_srcStore2['default']));
@@ -64,36 +63,29 @@ function setupRoutes(app) {
 }
 
 function setupMiddleware(app) {
-  console.log('setupMiddleware');
   app.use(_jsonServer2['default'].defaults);
   app.use(_bodyParser2['default'].json());
   return app;
 }
 
 function initScripts(app) {
-  console.log('initScripts');
   _srcStore2['default'].dispatch(resourceActions['FETCH_RESOURCE']({ def: _definitionsStory2['default'] }));
   _srcStore2['default'].dispatch(resourceActions['FETCH_RESOURCE']({ def: _definitionsSentence2['default'] }));
   return app;
 }
 
 function startServer(app) {
-  console.log('startServer');
   var server = _http2['default'].createServer(app);
   // Start Socket
   (0, _srcSocket2['default'])(_srcStore2['default'], server);
-  return server;
+  server.listen(process.env.PORT || 8091);
 }
 
 exports['default'] = function () {
   console.log('Booting server');
   var app = _jsonServer2['default'].create();
 
-  console.log('Compose');
-
-  var server = (0, _ramda.compose)(startServer, initScripts, setupMiddleware, setupRoutes)(app);
-
-  server.listen(process.env.PORT || 8091);
+  (0, _ramda.compose)(startServer, initScripts, setupMiddleware, setupRoutes)(app);
 };
 
 module.exports = exports['default'];

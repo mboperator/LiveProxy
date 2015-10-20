@@ -3,10 +3,12 @@ import q from 'q';
 
 const BASE_URL = 'http://liveproxy-rails-example.herokuapp.com';
 // const BASE_URL = 'http://localhost:8092';
-const API_PATH = 'api/v1/';
+const API_PATH = 'api/v1';
 
 function pathForResource(def) {
-  return `${BASE_URL}/${API_PATH}/${def.keys.plural}`;
+  const path = `${BASE_URL}/${API_PATH}/${def.keys.plural}`;
+  console.log('Hitting API', path);
+  return path;
 }
 
 export function fetch(action) {

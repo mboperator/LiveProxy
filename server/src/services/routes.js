@@ -19,6 +19,8 @@ export default function createRouter(store) {
     const action = resourceActions['DESTROY_RESOURCE'](actionRequest);
     const { type, payload } = action;
     apiRequest.destroy(actionRequest).then( (data) => {
+      console.log('story destroyed', req.params.id);
+      res.sendStatus(204);
       store.dispatch({
         type: `${type}_SUCCESS`,
         meta: action.meta,
@@ -26,7 +28,6 @@ export default function createRouter(store) {
         result: data,
         readyState: 'success',
       });
-      res.sendStatus(200);
     });
   });
 

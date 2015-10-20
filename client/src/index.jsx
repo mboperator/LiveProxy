@@ -7,7 +7,7 @@ import App from './components/App';
 import { StateViewerContainer } from './components/StateViewer';
 import { PostsContainer } from './components/posts';
 import { StoriesContainer } from './components/stories';
-import getStore from './store';
+import store from './store';
 
 const routes = (
   <Route handler={App}>
@@ -17,8 +17,6 @@ const routes = (
     <DefaultRoute handler={StateViewerContainer}/>
   </Route>
 );
-
-const store = getStore();
 
 setTimeout(() => {
   const action = fetch({def: story});

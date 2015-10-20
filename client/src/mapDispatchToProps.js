@@ -3,10 +3,7 @@ import {
   DESTROY_RESOURCE, PATCH_RESOURCE
 } from './constants/resources';
 
-import getStore from './store';
 import * as actions from './actions/action_creators';
-
-const store = getStore();
 
 export default function mapDispatchToProps(dispatch) {
   return {

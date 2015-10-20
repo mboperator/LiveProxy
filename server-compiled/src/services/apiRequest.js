@@ -20,10 +20,12 @@ var _q2 = _interopRequireDefault(_q);
 
 var BASE_URL = 'http://liveproxy-rails-example.herokuapp.com';
 // const BASE_URL = 'http://localhost:8092';
-var API_PATH = 'api/v1/';
+var API_PATH = 'api/v1';
 
 function pathForResource(def) {
-  return BASE_URL + '/' + API_PATH + '/' + def.keys.plural;
+  var path = BASE_URL + '/' + API_PATH + '/' + def.keys.plural;
+  console.log('Hitting API', path);
+  return path;
 }
 
 function fetch(action) {

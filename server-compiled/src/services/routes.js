@@ -11,13 +11,17 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'd
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var _store = require('../store');
+var _express = require('express');
 
-var _store2 = _interopRequireDefault(_store);
+var _express2 = _interopRequireDefault(_express);
 
 var _apiRequest = require('./apiRequest');
 
 var apiRequest = _interopRequireWildcard(_apiRequest);
+
+var _actionsResource = require('../actions/resource');
+
+var resourceActions = _interopRequireWildcard(_actionsResource);
 
 var _definitionsStory = require('../../definitions/story');
 
@@ -27,34 +31,25 @@ var _definitionsSentence = require('../../definitions/sentence');
 
 var _definitionsSentence2 = _interopRequireDefault(_definitionsSentence);
 
-var _actionsResource = require('../actions/resource');
-
-var resourceActions = _interopRequireWildcard(_actionsResource);
-
-var _express = require('express');
-
-var _express2 = _interopRequireDefault(_express);
-
-var router = _express2['default'].Router();
-
-var storyRoute = '/stories';
-var sentenceRoute = '/sentences';
-
 function createRouter(store) {
+  var router = _express2['default'].Router();
 
-  router.get(storyRoute, function (req, res) {
+  router.get('/stories', function (req, res) {
+    console.log('stories#index');
     var resources = store.getState().getIn(['collections', _definitionsStory2['default'].name]).toList().toJS();
     res.send(_defineProperty({}, _definitionsStory2['default'].keys.plural, resources));
   });
 
   router['delete']('/stories/:id', function (req, res) {
-    console.log('Deleting', req.params.id);
+    console.log('stories#delete', req.params.id);
     var actionRequest = { def: _definitionsStory2['default'], id: req.params.id };
     var action = resourceActions['DESTROY_RESOURCE'](actionRequest);
     var type = action.type;
     var payload = action.payload;
 
     apiRequest.destroy(actionRequest).then(function (data) {
+      console.log('story destroyed', req.params.id);
+      res.sendStatus(204);
       store.dispatch({
         type: type + '_SUCCESS',
         meta: action.meta,
@@ -62,12 +57,11 @@ function createRouter(store) {
         result: data,
         readyState: 'success'
       });
-      res.sendStatus(200);
     });
   });
 
-  router.post(storyRoute, function (req, res) {
-    console.log('CREATE', req.body);
+  router.post('/stories', function (req, res) {
+    console.log('stories#create', req.body);
     var actionRequest = { def: _definitionsStory2['default'], doc: req.body };
     var action = resourceActions['CREATE_RESOURCE'](actionRequest);
     var type = action.type;
@@ -85,13 +79,15 @@ function createRouter(store) {
     });
   });
 
-  router.patch(storyRoute, function (req, res) {
+  router.patch('/stories', function (req, res) {
+    console.log('stories#patch', req.body);
     var actionRequest = { def: _definitionsStory2['default'], doc: req.body };
     var action = resourceActions['PATCH_RESOURCE'](actionRequest);
     var type = action.type;
     var payload = action.payload;
 
     apiRequest.patch(actionRequest).then(function (data) {
+      res.send(data);
       store.dispatch({
         type: type + '_SUCCESS',
         meta: action.meta,
@@ -99,11 +95,10 @@ function createRouter(store) {
         result: data,
         readyState: 'success'
       });
-      res.send(data);
     });
   });
+
   return router;
 }
 
-;
 module.exports = exports['default'];
