@@ -16,9 +16,9 @@ var _srcStore = require('./src/store');
 
 var _srcStore2 = _interopRequireDefault(_srcStore);
 
-var _srcServer = require('./src/server');
+var _srcSocket = require('./src/socket');
 
-var _srcServer2 = _interopRequireDefault(_srcServer);
+var _srcSocket2 = _interopRequireDefault(_srcSocket);
 
 var _jsonServer = require('json-server');
 
@@ -48,23 +48,51 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
-exports['default'] = function () {
-  var apiServer = _jsonServer2['default'].create();
-  var router = _jsonServer2['default'].router(require('./db.json'));
-  var store = (0, _srcStore2['default'])();
-  store.dispatch(resourceActions['FETCH_RESOURCE']({ def: _definitionsStory2['default'] }));
-  store.dispatch(resourceActions['FETCH_RESOURCE']({ def: _definitionsSentence2['default'] }));
+var _ramda = require('ramda');
 
-  apiServer.get('/', function (req, res) {
+function setupRoutes(app) {
+  console.log('setupRoutes');
+  var jsonApi = _jsonServer2['default'].router(require('./db.json'));
+
+  app.use('/api/v1', (0, _srcServicesRoutesJs2['default'])(_srcStore2['default']));
+  app.use('/api/mock', jsonApi);
+  app.get('/', function (req, res) {
     res.sendFile(_path2['default'].join(__dirname, '../', 'client') + '/index.html');
   });
-  apiServer.use('/api/mock', router);
-  apiServer.use(_jsonServer2['default'].defaults);
-  apiServer.use(_bodyParser2['default'].json());
-  apiServer.use('/api/v1', (0, _srcServicesRoutesJs2['default'])(store));
 
-  var server = _http2['default'].createServer(apiServer);
-  (0, _srcServer2['default'])(server, store);
+  return app;
+}
+
+function setupMiddleware(app) {
+  console.log('setupMiddleware');
+  app.use(_jsonServer2['default'].defaults);
+  app.use(_bodyParser2['default'].json());
+  return app;
+}
+
+function initScripts(app) {
+  console.log('initScripts');
+  _srcStore2['default'].dispatch(resourceActions['FETCH_RESOURCE']({ def: _definitionsStory2['default'] }));
+  _srcStore2['default'].dispatch(resourceActions['FETCH_RESOURCE']({ def: _definitionsSentence2['default'] }));
+  return app;
+}
+
+function startServer(app) {
+  console.log('startServer');
+  var server = _http2['default'].createServer(app);
+  // Start Socket
+  (0, _srcSocket2['default'])(_srcStore2['default'], server);
+  return server;
+}
+
+exports['default'] = function () {
+  console.log('Booting server');
+  var app = _jsonServer2['default'].create();
+
+  console.log('Compose');
+
+  var server = (0, _ramda.compose)(startServer, initScripts, setupMiddleware, setupRoutes)(app);
+
   server.listen(process.env.PORT || 8091);
 };
 

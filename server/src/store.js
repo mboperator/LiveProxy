@@ -9,6 +9,13 @@ const createStoreWithMiddleware = applyMiddleware(
   stateLoggerMiddleware
 )(createStore);
 
-export default function configureStore(initialState=Map({ collections: Map() })) {
-  return createStoreWithMiddleware(reducer, initialState);
-};
+let store;
+
+function initStore(initialState = Map()) {
+  if (store) { return store; }
+  store = createStoreWithMiddleware(reducer, initialState);
+  return store;
+}
+
+
+export default initStore();

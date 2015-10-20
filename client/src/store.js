@@ -41,6 +41,4 @@ socket.on('state', action => {
   store.dispatch(setState(action));
 });
 
-export default function getStore() {
-  return store;
-}
+export default store;

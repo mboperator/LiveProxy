@@ -3,7 +3,6 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-exports['default'] = configureStore;
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
@@ -25,11 +24,17 @@ var _immutable = require('immutable');
 
 var createStoreWithMiddleware = (0, _redux.applyMiddleware)(_middlewareOptimisticMiddleware2['default'], _middlewareStateLoggerMiddleware2['default'])(_redux.createStore);
 
-function configureStore() {
-  var initialState = arguments.length <= 0 || arguments[0] === undefined ? (0, _immutable.Map)({ collections: (0, _immutable.Map)() }) : arguments[0];
+var store = undefined;
 
-  return createStoreWithMiddleware(_reducers2['default'], initialState);
+function initStore() {
+  var initialState = arguments.length <= 0 || arguments[0] === undefined ? (0, _immutable.Map)() : arguments[0];
+
+  if (store) {
+    return store;
+  }
+  store = createStoreWithMiddleware(_reducers2['default'], initialState);
+  return store;
 }
 
-;
+exports['default'] = initStore();
 module.exports = exports['default'];
