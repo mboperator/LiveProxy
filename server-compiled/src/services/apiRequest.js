@@ -18,6 +18,10 @@ var _q = require('q');
 
 var _q2 = _interopRequireDefault(_q);
 
+var _reqwest = require('reqwest');
+
+var _reqwest2 = _interopRequireDefault(_reqwest);
+
 var BASE_URL = 'http://liveproxy-rails-example.herokuapp.com';
 // const BASE_URL = 'http://localhost:8092';
 var API_PATH = 'api/v1';
@@ -63,10 +67,17 @@ function destroy(action) {
   var id = action.id;
   var def = action.def;
 
-  _axios2['default']['delete'](pathForResource(def) + '/' + id).then(function (res) {
-    return deferred.resolve(res);
-  })['catch'](function (err) {
-    return deferred.reject(err);
+  (0, _reqwest2['default'])({
+    url: pathForResource(def) + '/' + id,
+    type: 'json',
+    method: 'delete',
+    contentType: 'application/json',
+    error: function error(err) {
+      return deferred.reject(err);
+    },
+    success: function success(resp) {
+      return deferred.resolve(resp);
+    }
   });
 
   return deferred.promise;

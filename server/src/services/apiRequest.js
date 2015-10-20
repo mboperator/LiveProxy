@@ -1,5 +1,6 @@
 import axios from 'axios';
 import q from 'q';
+import reqwest from 'reqwest';
 
 const BASE_URL = 'http://liveproxy-rails-example.herokuapp.com';
 // const BASE_URL = 'http://localhost:8092';
@@ -40,10 +41,14 @@ export function destroy(action) {
   let deferred = q.defer();
   const { id, def } = action;
 
-  axios
-  .delete(`${pathForResource(def)}/${id}`)
-  .then(res => { return deferred.resolve(res); })
-  .catch(err => { return deferred.reject(err); });
+  reqwest({
+    url: `${pathForResource(def)}/${id}`,
+    type: 'json',
+    method: 'delete',
+    contentType: 'application/json',
+    error(err) { return deferred.reject(err); },
+    success(resp) { return deferred.resolve(resp); },
+  });
 
   return deferred.promise;
 }
